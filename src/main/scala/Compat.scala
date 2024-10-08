@@ -6,7 +6,7 @@
  */
 package spray.boilerplate
 
-import sbt._
+import sbt.{given, _}
 import Keys._
 import sbt.internal.io.Source
 

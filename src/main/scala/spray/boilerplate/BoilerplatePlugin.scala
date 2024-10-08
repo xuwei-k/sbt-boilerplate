@@ -37,7 +37,10 @@ object BoilerplatePlugin extends AutoPlugin {
         boilerplateSource := sourceDirectory.value / "boilerplate",
         boilerplateGeneratedExtension := "scala",
         boilerplateGenerate := generateFromTemplates(streams.value, boilerplateSignature.value, boilerplateSource.value, sourceManaged.value, boilerplateGeneratedExtension.value),
-        mappings in packageSrc ++= managedSources.value pair (Path.relativeTo(sourceManaged.value) | Path.flat),
+        packageSrc / mappings ++= {
+          val converter = fileConverter.value
+          managedSources.value.pair(Path.relativeTo(sourceManaged.value) | Path.flat).map{ (x1, x2) => converter.toVirtualFile(x1.toPath) -> x2 }
+        },
         sourceGenerators += boilerplateGenerate)
   }
 

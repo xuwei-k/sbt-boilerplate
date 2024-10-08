@@ -1,7 +1,7 @@
 lazy val root = (project in file("."))
   .enablePlugins(SbtPlugin)
   .settings(
-    crossScalaVersions := Seq("2.12.20"),
+    crossScalaVersions := Seq("2.12.20", "3.3.4"),
     name := "sbt-boilerplate",
     organization := "com.github.sbt",
     description := "An SBT plugin for simple generation of boilerplate",
@@ -17,6 +17,7 @@ lazy val root = (project in file("."))
     pluginCrossBuild / sbtVersion := {
       scalaBinaryVersion.value match {
         case "2.12" => "1.9.7" // set minimum sbt version
+        case _      => "2.0.0-M2"
       }
     },
   developers += Developer(
